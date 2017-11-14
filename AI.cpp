@@ -13,6 +13,7 @@
 
 //----------INCLUDING---------
 #include "AI.h"
+#include "MovesEvaluator.h"
 
 //----------INITIALIZER-LIST----------
 /*
@@ -20,7 +21,7 @@
  *
  * @param gb Board -- the game's board
  */
-AI::AI(Board* gameBoard): Player(WHITE, gb){}
+AI::AI(Board* gameBoard): Player(WHITE, gameBoard) {}
 
 //----------PUBLIC FUNCTIONS----------
 /*
@@ -28,6 +29,25 @@ AI::AI(Board* gameBoard): Player(WHITE, gb){}
  *
  * @return string -- a raw string of player's move
  */
-string AI::makeAMove() const {
-    
+CellIndex AI::makeAMove(vector<CellIndex> aMoves) const {
+    //Local Variables
+    vector<CellIndex>::iterator it = aMoves.begin();
+    Board simulationBoard = *gameBoard; //Copy board
+
+    while(it != aMoves.end()) {
+        //simulate move
+        simulationBoard.moveMade(*it, Player::getValue());
+
+
+        ++it;
+    }
+
+    //Print
+    cout << "Mmm... Let me think..." << endl;
+
+    sleep(USING_BOARD->getAvailableSlots() * 500);
+
+
 }
+
+

@@ -9,10 +9,10 @@
  *  strings will be managed by the TurnsManager.
  */
 
-//----------Initializer List----------
-
+//----------INCLUDING----------
 #include "Player.h"
 
+//----------Initializer List----------
 /*
  * Player() Constructor.
  */
@@ -20,6 +20,7 @@ Player::Player(): value(BLACK) {
     this->gameBoard = nullptr;
 }
 
+//----------PUBLIC FUNCTIONS----------
 /*
  * Player(Cell c) Constructor.
  *

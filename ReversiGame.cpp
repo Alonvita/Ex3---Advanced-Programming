@@ -36,11 +36,11 @@ void ReversiGame::startGame() {
     //Print the board
     GAME_BOARD.printBoard();
     while((GAME_BOARD.getSpaceLeft())) {
-                //Evaluate available moves for player
+        //Evaluate available moves for player
         MANAGER->evaluateAvailableMovesForThisTurn(this->gameBoard);
 
         //End turn if player has no available moves
-        if(MANAGER->getAvailableMoves().size() == 0) {
+        if(MANAGER->getAvailableMovesNum() == 0) {
             MANAGER->endTurn();
         } else {
             //Nested Functions explanation: moveMade (board) calls:

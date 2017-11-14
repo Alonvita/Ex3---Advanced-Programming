@@ -27,21 +27,20 @@ TurnsManager::TurnsManager(): playerTurn(0) {
 TurnsManager::~TurnsManager() {
     //Remove both players
     vector<Player*> vec;
-
-    this->players.swap(vec);
-}
-
-//----------Public Functions----------
-/*
- * getAvailableMoves().
- *
- * @return vector<CellIndex> -- a vector with all current available moves.
- */
-vector<CellIndex> TurnsManager::getAvailableMoves() {
-    return this->availableMoves;
+    players.swap(vec);
 }
 
 //----------GETTERS & SETTERS----------
+
+/*
+ * getAvailableMovesNum().
+ *
+ * @return int -- the number of available moves for this turn.
+ */
+int TurnsManager::getAvailableMovesNum() {
+    return (int) availableMoves.size();
+}
+
 /*
  * getCurrentPlayerColor().
  *
@@ -51,6 +50,7 @@ Cell TurnsManager::getCurrentPlayerColor() {
     return ((Cell)this->playerTurn);
 }
 
+//----------Public Functions----------
 /*
  * addCellToAvailableMoves(cI CellIndex).
  *
@@ -77,45 +77,10 @@ void TurnsManager::endTurn() {
  * @param gb Board* -- the game's board.
  */
 void TurnsManager::evaluateAvailableMovesForThisTurn(Board* gb) {
-    //Local Variables
-    vector<CellIndex> cellsInUse = gb->getCellsInUse();
-    vector<CellIndex>::iterator it = cellsInUse.begin();
-
-    //clear last turn's availableMoves
-    this->availableMoves.clear();
-
-    //Itter over cellsInUse
-    while(it != cellsInUse.end()) {
-        //Inner Loop Variables
-        Cell currentCell = gb->getBoardCell((*it).index[0],(*it).index[1]);
-
-        //Check if cell's value is OPPOSITE to the playing player's value
-        if((currentCell == WHITE && playerTurn == BLACK)
-           || (currentCell == BLACK && playerTurn == WHITE)) {
-            //get cell's empty neighbors
-            vector<CellIndex> emptyNeighbors = gb->getEmptyNeighbors(*it);
-            vector<CellIndex>::iterator it = emptyNeighbors.begin();
-
-            //For each neighbor -> check that it has potential
-            while(it != emptyNeighbors.end()) {
-
-                //create potential vector
-                vector<CellIndex> cellPotential =
-                        gb->getCellPotentialAsVector(*it, (Cell)playerTurn);
-
-                //Cell has potential and therefore an available move!
-                if(!cellPotential.empty()) {
-                    //Reserve place for the vector
-                    addCellToAvailableMoves(*it);
-                }
-
-                ++it;
-            }
-        }
-        ++it;
-    }
-    //Clear Duplicates
-    clearDuplicatesValues(&availableMoves);
+    //clear last turn's availableMoves, get new moves and shrink
+    availableMoves.clear();
+    availableMoves = MovesEvaluator::evaluateAvailableMoves(gb, (Cell)playerTurn);
+    availableMoves.shrink_to_fit();
 
     //Print
     cout << callPlayerByName() << " player: it's your move." << endl;
@@ -132,18 +97,10 @@ void TurnsManager::evaluateAvailableMovesForThisTurn(Board* gb) {
  */
 CellIndex TurnsManager::playerMove(int boardSize) {
     //Local Variables
-    string playerMoveAsRawString;
     CellIndex playerMove;
 
     do {
-        //Print
-        cout << "Please make a move row,col:" << endl;
-
-        playerMoveAsRawString = (*PLAYER).makeAMove();
-
-        playerMove = stringToPlayerMove(playerMoveAsRawString, boardSize);
-
-        //Scan move from player
+        playerMove = (*PLAYER).makeAMove(availableMoves);
     } while(!isMoveLegal(playerMove));
 
     return playerMove;
@@ -155,6 +112,14 @@ CellIndex TurnsManager::playerMove(int boardSize) {
  */
 void TurnsManager::initializeTwoParticipants() {
     players.push_back(new Participant(WHITE));
+    players.push_back(new Participant(BLACK));
+}
+
+/*
+ * initializeParticipantAndAI().
+ */
+void TurnsManager::initializeParticipantAndAI(Board* gb) {
+    players.push_back(new AI(gb));
     players.push_back(new Participant(BLACK));
 }
 
@@ -227,57 +192,4 @@ bool TurnsManager::isMoveLegal(CellIndex cI) {
 
     cout << "This move is illegal" << endl;
     return false;
-}
-
-/*
- * stringToVector(string str).
- *
- * @param str string -- a string.
- *
- * @return vector<string> -- a vector holding the string broken to pieces,
- * 							 saparated by the delimiter ','.
- */
-vector<string> TurnsManager::stringToVector(string str) {
-    istringstream ss(str);
-    string token;
-    vector<string> vec;
-
-    while(std::getline(ss, token, ',')) {
-        vec.push_back(token);
-    }
-
-    return vec;
-}
-
-/*
- * stringToPlayerMove(string rawString, int boardSize).
- *
- * @param rawString string -- a raw representation of a player's move.
- * @param boardSize int -- the gameboard's size
- *
- * @returm CellIndex -- a CellIndex represents the player's move.
- */
-CellIndex TurnsManager::stringToPlayerMove(string rawString, int boardSize) {
-    //Local Variables
-    vector<string> stringAsVector = stringToVector(rawString);
-    CellIndex retVal = { -1, -1 }; //Default value is out of bounds
-
-    //First, check vector size
-    if(stringAsVector.size() != 2) {
-        return retVal;
-    }
-
-    //get row,col for player input -1 since we are working with an array.
-    int row = atoi(stringAsVector.at(0).c_str()) - 1;
-    int col = atoi(stringAsVector.at(1).c_str()) - 1;
-
-    //if size is good, check validity
-    if(0 <= row && row < boardSize && 0 <= col && col < boardSize) {
-        //Change return value
-        retVal.index[0] = row;
-        retVal.index[1] = col;
-        return retVal;
-    }
-
-    return retVal;
 }

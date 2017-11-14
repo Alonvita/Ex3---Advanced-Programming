@@ -20,6 +20,4 @@
 
 void clearDuplicatesValues(vector<CellIndex>* vec);
 
-
-
 #endif //UNTITLED_UTILITIES_H

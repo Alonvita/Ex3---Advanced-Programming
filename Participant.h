@@ -15,6 +15,7 @@
 //----------INCLUDING----------
 #include <string>
 #include <iostream>
+#include <sstream>
 #include "Cell.h"
 #include "Player.h"
 
@@ -27,7 +28,9 @@ public:
     explicit            Participant(Cell c);
 
     //In-Game Usage
-    virtual string       makeAMove() const override;
+    virtual CellIndex   makeAMove(vector<CellIndex> aMoves) const;
+    vector<string> 		stringToVector(string str) const;
+    CellIndex 			stringToPlayerMove(string rawString) const;
 };
 
 #endif /* PLAYER_H_ */

@@ -15,13 +15,13 @@
 //----------INCLUDING----------
 #include <vector>
 #include <iostream>
-#include <sstream>
 #include <string>
+#include "AI.h"
 #include "Board.h"
 #include "Cell.h"
 #include "GameUtilities.h"
+#include "MovesEvaluator.h"
 #include "Participant.h"
-#include "AI.h"
 
 //----------DEFINITIONS----------
 #define PLAYER this->players.at(playerTurn)
@@ -29,7 +29,7 @@
 using namespace std;
 
 
-class TurnsManager {
+class TurnsManager: MovesEvaluator {
 public:
     //----------PUBLIC FUNCTIONS----------
     //Initializer
@@ -38,15 +38,16 @@ public:
     ~TurnsManager();
 
     //Getters & Setters
-    vector<CellIndex>	getAvailableMoves();
+    int	                getAvailableMovesNum();
     void				addCellToAvailableMoves(CellIndex cI);
     Cell				getCurrentPlayerColor();
 
     //Utilities
     void 				endTurn();
-    void 				evaluateAvailableMovesForThisTurn(Board* gb);
     CellIndex 			playerMove(int boardSize);
 
+    //Nested Classes
+    void evaluateAvailableMovesForThisTurn(Board *gb);
 private:
     //----------VARIABLES----------
     bool 				    playerTurn;
@@ -56,13 +57,12 @@ private:
     //----------PRIVATE FUNCTIONS----------
     //Initializers
     void	 			initializeTwoParticipants();
-    void                initializeParticipantAndAI(Board* gameBoard);
+    void                initializeParticipantAndAI(Board* gb);
 
     //Utilities
     string 				callPlayerByName();
     bool 				isMoveLegal(CellIndex cI);
-    vector<string> 		stringToVector(string str);
-    CellIndex 			stringToPlayerMove(string rawString, int boardSize);
+
     //Printing
     void				printAvailableMoves();
 };

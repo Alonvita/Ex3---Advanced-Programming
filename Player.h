@@ -26,7 +26,7 @@ public:
     explicit            Player(Cell c, Board* gb);
 
     //In-Game Usage
-   virtual string       makeAMove() const = 0;
+   virtual CellIndex    makeAMove(vector<CellIndex> aMoves) const = 0;
 
     //Getters & Setters
     Cell                getValue() const;
@@ -34,6 +34,7 @@ public:
 //----------PRIVATE CLASSES----------
 private:
     Cell                value;
+protected:
     Board*              gameBoard;
 };
 

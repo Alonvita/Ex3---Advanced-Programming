@@ -44,6 +44,7 @@ public:
     vector<CellIndex> 	getCellsInUse();
     Cell 				getBoardCell(int row, int col);
     int					getSize();
+    int                 getAvailableSlots();
     //Printing
     void 				printBoard();
     //In-game use
@@ -59,7 +60,6 @@ private:
     //----------VARIABLES----------
     int 				size;
     Cell** 				board;
-    int 				availableSlots;
     vector<CellIndex> 	cellsInUse;
 
     //----------PRIVATE FUNCTIONS----------

@@ -66,7 +66,7 @@ void Board::printBoard() {
  * @return int -- the number of cells left to play on
  */
 int Board::getSpaceLeft() {
-    return availableSlots;
+    return (int)(size * size - cellsInUse.size());
 }
 
 /*
@@ -92,6 +92,15 @@ Cell Board::getBoardCell(int row, int col) {
  */
 int	Board::getSize() {
     return this->size;
+}
+
+/*
+ * getAvailableSlots().
+ *
+ * @return int -- the number of available slots on board.
+ */
+int Board::getAvailableSlots() {
+    return this->cellsInUse.size();
 }
 
 /*
@@ -226,8 +235,6 @@ void Board::moveMade(CellIndex cI, Cell value) {
     BOARD[row][col] = value;
     //Add cell to used cells
     this->cellsInUse.push_back(cI);
-    //reduce number of cells available
-    this->availableSlots --;
 
     //-----Change Board Accordingly-----
     while(it != cellsEffected.end()) {
@@ -266,7 +273,6 @@ void Board::initializeBoard() {
     }
 
     initializeStartingCellValues();
-    calculateSlotsLeft();
 }
 
 /*
@@ -322,13 +328,6 @@ string Board::generateCellValue(Cell c) {
         default:
             return " ";
     }
-}
-
-/*
- * calculateSpaceLeft().
- */
-void Board::calculateSlotsLeft() {
-    this->availableSlots = size * size - 4;
 }
 
 /*
