@@ -37,7 +37,6 @@ Player::Player(Cell c): value(c) {
  */
 Player::Player(Cell c, Board* gb): value(c), gameBoard(gb) {}
 
-
 /*
  * getValue().
  *
