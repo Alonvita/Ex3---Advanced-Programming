@@ -14,8 +14,8 @@
 
 //----------PUBLIC FUNCTIONS----------
 
-vector<CellIndex> MovesEvaluator::evaluateAvailableMoves(Board* gb,
-                                                         Cell playerColor) {
+vector<CellIndex> MovesEvaluator::
+            evaluateAvailableMoves(Board* gb, Cell playerColor) const {
     //Local Variables
     vector<CellIndex> cellsInUse = gb->getCellsInUse();
     vector<CellIndex>::iterator it = cellsInUse.begin();

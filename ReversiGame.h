@@ -25,7 +25,7 @@ class ReversiGame {
 public:
     //----------PUBLIC FUNCTIONS----------
     //Initializers
-    ReversiGame(Board* gb);
+    ReversiGame(int boardType);
     //Destructor
     ~ReversiGame();
     //Utilities
@@ -37,7 +37,13 @@ private:
     TurnsManager* 		manager;
 
     //----------PRIVATE FUNCTIONS----------
+    //Initializing Functions
+    void                initializeTurnsManager();
+
+    //In-Game Use
     void                endGame();
+
+    //Utility
     void                announceWinner();
     string              generatePlayerName(bool b);
 };

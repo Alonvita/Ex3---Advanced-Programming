@@ -33,7 +33,7 @@ class TurnsManager: MovesEvaluator {
 public:
     //----------PUBLIC FUNCTIONS----------
     //Initializer
-    TurnsManager();
+    TurnsManager(int numPlayers, Board* gb);
     //Destructor
     ~TurnsManager();
 
@@ -44,7 +44,7 @@ public:
 
     //Utilities
     void 				endTurn();
-    CellIndex 			playerMove(int boardSize);
+    CellIndex 			nextMove(int boardSize);
 
     //Nested Classes
     void evaluateAvailableMovesForThisTurn(Board *gb);
@@ -57,7 +57,7 @@ private:
     //----------PRIVATE FUNCTIONS----------
     //Initializers
     void	 			initializeTwoParticipants();
-    void                initializeParticipantAndAI(Board* gb);
+    void                initializeOneParticipant(Board* gb);
 
     //Utilities
     string 				callPlayerByName();

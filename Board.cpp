@@ -100,7 +100,7 @@ int	Board::getSize() {
  * @return int -- the number of available slots on board.
  */
 int Board::getAvailableSlots() {
-    return this->cellsInUse.size();
+    return ((int)this->cellsInUse.size());
 }
 
 /*
@@ -135,6 +135,38 @@ int* Board::evaluateFinalScore() {
     }
 
     return scoresArray;
+}
+
+/*
+ * getBoard();
+ *
+ * @return Board* -- a new board, containing the same values as this one.
+ */
+Board* Board::getBoard() {
+    //Local Variables
+    int type = size == 6 ? 1 : size == 6 ? 2 : 3;
+    Board* copiedBoard = new Board(type);
+
+    //for all cells on board
+    for(int i = 0; i < size; ++i) {
+        for(int j = 0; j < size; ++j) {
+            copiedBoard->setCell(i, j, this->board[i][j]); //set cell
+        }
+    }
+
+    return copiedBoard;
+}
+
+//Setters
+/*
+ * setCell(int row, int col, Cell val).
+ *
+ * @param row int -- row number
+ * @param col int -- col number
+ * @param val Cell -- the cell's status
+ */
+void Board::setCell(int row, int col, Cell val) {
+    this->board[row][col] = val;
 }
 
 //----------IN-GAME USED FUNCTIONS-----------

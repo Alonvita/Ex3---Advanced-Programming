@@ -16,8 +16,9 @@
  *
  * @param gb Board* -- a reference to the game's board.
  */
-ReversiGame::ReversiGame(Board* gb): gameBoard(gb) {
-    MANAGER = new TurnsManager();
+ReversiGame::ReversiGame(int boardType) {
+    gameBoard = new Board(boardType);
+    initializeTurnsManager();
 }
 
 //----------DESTRUCTORS----------
@@ -28,9 +29,30 @@ ReversiGame::~ReversiGame() {
     delete manager;
 }
 
+//----------INITIALIZING FUNCTIONS----------
+/* initializeTurnsManager().
+ *
+ * This function will scan a number of players from the player and create the
+ *  turns manager accordingly.
+ */
+void ReversiGame::initializeTurnsManager() {
+    //Local Variables
+    int numberOfPlayers;
+
+    do {
+        cout << "Please choose one of the next options:" << endl
+             << "Player vs. PC: 1" << endl << "Player vs. Player: 2" << endl;
+        cin >> numberOfPlayers;
+    } while(!(0 < numberOfPlayers && numberOfPlayers < 3));
+
+    manager = new TurnsManager(numberOfPlayers, gameBoard);
+}
+
 //----------PUBLIC FUNCTIONS----------
-/*
- * startGame().
+//----------IN-GAME USE-----------
+/* startGame().
+ *
+ * This function will start the game and handle the game flow.
  */
 void ReversiGame::startGame() {
     //Print the board
@@ -44,9 +66,9 @@ void ReversiGame::startGame() {
             MANAGER->endTurn();
         } else {
             //Nested Functions explanation: moveMade (board) calls:
-            //  1). playerMove (manager) -> CellIndex
+            //  1). nextMove (manager) -> CellIndex
             //  2). getCurrentPlayerColor (manager) -> Cell
-            GAME_BOARD.moveMade(MANAGER->playerMove(GAME_BOARD.getSize()),
+            GAME_BOARD.moveMade(MANAGER->nextMove(GAME_BOARD.getSize()),
                                 MANAGER->getCurrentPlayerColor());
             MANAGER->endTurn();
 
@@ -57,6 +79,10 @@ void ReversiGame::startGame() {
     endGame();
 }
 
+/* endGame().
+ *
+ * This function will end the game and call announceWinner().
+ */
 void ReversiGame::endGame() {
     //Ending announcement
     cout << "The game has ended!" << endl << endl;
@@ -68,6 +94,12 @@ void ReversiGame::endGame() {
     announceWinner();
 }
 
+//----------UTILITY-----------
+
+/* announceWinner().
+ *
+ * This function calculates the board's status and returns the winner.
+ */
 void ReversiGame::announceWinner() {
     //Local Variables
     int* scores = GAME_BOARD.evaluateFinalScore(); //get scores array
@@ -94,7 +126,8 @@ void ReversiGame::announceWinner() {
 
 /* generatePlayerName(bool b).
  *
- * @param bool b -- a boolean representing true/false so that true is white false is black.
+ * @param bool b -- a boolean representing true/false so that true is
+ *                   white false is black.
  *
  * @return string representing player's name
  */

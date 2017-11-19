@@ -21,9 +21,7 @@ int main() {
          "3: 10x10" << endl;
     cin >> boardType;
 
-    Board b(boardType);
-
-    //create game with initialized board
-    ReversiGame g(&b);
+    //create game with given board size
+    ReversiGame g(boardType);
     g.startGame();
 }

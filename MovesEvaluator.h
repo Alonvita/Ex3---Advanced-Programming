@@ -20,8 +20,8 @@
 class MovesEvaluator {
 public:
     //In-Game Use
-    virtual vector<CellIndex>       evaluateAvailableMoves(Board* gb,
-                                                           Cell playerColor);
+    virtual vector<CellIndex>   evaluateAvailableMoves(Board* gb,
+                                                       Cell playerColor) const;
 };
 
 #endif //UNTITLED_MOVESEVALUATOR_H

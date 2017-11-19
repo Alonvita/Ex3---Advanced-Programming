@@ -16,8 +16,11 @@
 /*
  * TurnsManager() Constructor.
  */
-TurnsManager::TurnsManager(): playerTurn(0) {
-    initializeTwoParticipants();
+TurnsManager::TurnsManager(int numPlayers, Board* gb): playerTurn(0) {
+    if (numPlayers == 2)
+        initializeTwoParticipants();
+
+    initializeOneParticipant(gb);
 }
 
 //----------DESTRUCTORS----------
@@ -67,7 +70,7 @@ void TurnsManager::addCellToAvailableMoves(CellIndex cI) {
  *  passed on to the next player.
  */
 void TurnsManager::endTurn() {
-    this->playerTurn = this->playerTurn ^ 1;
+    this->playerTurn = (Cell) this->playerTurn ^ 1;
 }
 
 
@@ -88,14 +91,14 @@ void TurnsManager::evaluateAvailableMovesForThisTurn(Board* gb) {
 }
 
 /*
- * playerMove(int boardSize).
+ * nextMove(int boardSize).
  *
  * @param boardSize int -- the board's size
  *
  * @return CellIndex* -- a reference to the move made as string holding a cell
  *  					 index as [row,col].
  */
-CellIndex TurnsManager::playerMove(int boardSize) {
+CellIndex TurnsManager::nextMove(int boardSize) {
     //Local Variables
     CellIndex playerMove;
 
@@ -118,9 +121,9 @@ void TurnsManager::initializeTwoParticipants() {
 /*
  * initializeParticipantAndAI().
  */
-void TurnsManager::initializeParticipantAndAI(Board* gb) {
-    players.push_back(new AI(gb));
-    players.push_back(new Participant(BLACK));
+void TurnsManager::initializeOneParticipant(Board* gb) {
+    players.push_back((AI*) new AI(gb));
+    players.push_back((Participant*) new Participant(BLACK));
 }
 
 //----------PRIVATE FUNCTIONS----------

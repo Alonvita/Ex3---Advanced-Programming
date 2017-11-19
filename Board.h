@@ -45,13 +45,20 @@ public:
     Cell 				getBoardCell(int row, int col);
     int					getSize();
     int                 getAvailableSlots();
+    Board*              getBoard();
+
+    //Setters
+    void                setCell(int row, int col, Cell val);
+
     //Printing
     void 				printBoard();
+
     //In-game use
     vector<CellIndex> 	getEmptyNeighbors(CellIndex cI);
     void				moveMade(CellIndex cI, Cell value);
     vector<CellIndex>	getCellPotentialAsVector(CellIndex cI, Cell type);
     int*                evaluateFinalScore();
+
     //Utility
     bool 				cellOnBoard(int row, int col);
     void 				clearBoard();
@@ -71,8 +78,6 @@ private:
     string 				generateCellValue(Cell c);
     vector<CellIndex> 	findPotentialInPath(CellIndex cI, int dRow,
                                              int dCol, Cell type);
-
-    void 				calculateSlotsLeft();
     void 				changeCellColor(CellIndex cI);
     //Printing
     void 				printColsNumbers();

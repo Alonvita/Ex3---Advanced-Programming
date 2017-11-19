@@ -24,6 +24,9 @@
 
 //----------DEFINITIONS----------
 #define USING_BOARD Player::gameBoard
+#define INT_MAX 2147483647
+#define AI_COLOR (Cell) Player::getValue()
+#define PLAYER_COLOR (Cell) !AI_COLOR
 
 using namespace std;
 
@@ -35,6 +38,10 @@ public:
 
     //In-Game Usage
     virtual CellIndex   makeAMove(vector<CellIndex> aMoves) const;
+
+private:
+    int                 calculatePotential(Board *gb,
+                                           vector<CellIndex> vec) const;
 };
 
 #endif /* AI_H_ */
