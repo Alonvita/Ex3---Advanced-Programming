@@ -1,17 +1,35 @@
 cmake_minimum_required(VERSION 3.8)
-project(untitled)
+project(AP1_ex3)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDATD 98)
+#set(CMAKE_CCX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -pthread -Wextra")
 
-set(SOURCE_FILES
-        main.cpp
-        Board.cpp Board.h
-        ReversiGame.cpp ReversiGame.h
-        TurnsManager.cpp TurnsManager.h
-        Participant.cpp Participant.h
-        Cell.h
-        GameUtilities.cpp GameUtilities.h
-        Player.h Player.cpp
-        AI.h AI.cpp
-        MovesEvaluator.h MovesEvaluator.cpp)
-add_executable(untitled ${SOURCE_FILES})
+add_subdirectory(lib/googletest-master)
+include_directories(lib/googletest-master/googletest/include)
+
+
+set(CORE_FILES
+		# Utilities
+		src/core/Utilities/GameUtilities.cpp src/core/Utilities/GameUtilities.h
+		# Players
+		src/core/Players/AI.cpp src/core/Players/AI.h
+		src/core/Players/Participant.cpp src/core/Players/Participant.h
+		src/core/Players/Player.cpp src/core/Players/Player.h
+		# Game Logic
+		src/core/GameLogic/TurnsManager.cpp src/core/GameLogic/TurnsManager.h
+		src/core/GameLogic/MovesEvaluator.cpp src/core/GameLogic/MovesEvaluator.h
+		# Game Flow
+		src/core/GameFlow/ReversiGame.cpp src/core/GameFlow/ReversiGame.h
+		# Board
+		src/core/Board/Board.cpp src/core/Board/Board.h
+		src/core/Board/Cell.h)
+
+set(SOURCE_FILES ${CORE_FILES})
+
+# set(TEST_FILES ...)
+
+add_executable(Run_main src/main.cpp ${SOURCE_FILES})
+
+#add_executable(runUnitTests Tests/tests_main.cpp ${TEST_FILES} ${SOURCE_FILES})
+#target_link_libraries(runUnitTests gtest gtest_main)
+

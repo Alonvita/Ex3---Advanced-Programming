@@ -1,7 +1,7 @@
 /*
- * Project: Ex3.
- * Author: Alon Vita
- * ID: 311233431
+ * Project:    Ex3.
+ * Author:  Alon Vita
+ *   ID:    311233431
  *
  * ReversiGame Class.
  *
