@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
 project(AP1_ex3)
 
-set(CMAKE_CXX_STANDATD 98)
+set(CMAKE_CXX_STANDATD 98 -Wall -Wextra)
 #set(CMAKE_CCX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -pthread -Wextra")
 
 add_subdirectory(lib/googletest-master)
@@ -24,12 +24,26 @@ set(CORE_FILES
 		src/core/Board/Board.cpp src/core/Board/Board.h
 		src/core/Board/Cell.h)
 
+set(TEST_FILES
+        # Board Test Files
+		Tests/TestBoard.cpp
+		# Moves Evaluator Test Files
+		Tests/TestMovesEvaluator.cpp;
+		# Turns Manager Test Files
+		Tests/TestTurnsManager.cpp
+        # AI Test Files
+        Tests/TestAI.cpp
+        # Participant Test Files
+        Tests/TestParticipant.cpp
+        # GameUtilities Test Files
+        Tests/TestGameUtilities.cpp)
+
 set(SOURCE_FILES ${CORE_FILES})
 
-# set(TEST_FILES ...)
-
+# Adding Executables
 add_executable(Run_main src/main.cpp ${SOURCE_FILES})
+add_executable(Run_tests Tests/tests_main.cpp ${TEST_FILES}
+                                                  ${SOURCE_FILES})
 
-#add_executable(runUnitTests Tests/tests_main.cpp ${TEST_FILES} ${SOURCE_FILES})
-#target_link_libraries(runUnitTests gtest gtest_main)
-
+# Link Libraries
+target_link_libraries(Run_tests gtest gtest_main)

@@ -55,20 +55,20 @@ void ReversiGame::initializeTurnsManager() {
  * This function will start the game and handle the game flow.
  */
 void ReversiGame::startGame() {
-    //Print the board
+    // Print the board
     GAME_BOARD.printBoard();
     while((GAME_BOARD.getSpaceLeft())) {
-        //Evaluate available moves for player
+        // Evaluate available moves for player
         MANAGER->evaluateAvailableMovesForThisTurn(this->gameBoard);
 
-        //End turn if player has no available moves
+        // End turn if player has no available moves
         if(MANAGER->getAvailableMovesNum() == 0) {
             MANAGER->endTurn();
         } else {
-            //Nested Functions explanation: moveMade (board) calls:
+            // Nested Functions explanation: moveMade (board) calls:
             //  1). nextMove (manager) -> CellIndex
             //  2). getCurrentPlayerColor (manager) -> Cell
-            GAME_BOARD.moveMade(MANAGER->nextMove(GAME_BOARD.getSize()),
+            GAME_BOARD.moveMade(MANAGER->nextMove(),
                                 MANAGER->getCurrentPlayerColor());
             MANAGER->endTurn();
 
