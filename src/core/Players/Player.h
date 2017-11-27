@@ -20,16 +20,16 @@
 class Player {
 //----------PUBLIC CLASSES----------
 public:
-    //Initializer
+    // Initialize
     Player();
     explicit            Player(Cell c);
     explicit            Player(Cell c, Board* gb);
 
-    //In-Game Usage
-   virtual CellIndex    makeAMove(vector<CellIndex> aMoves) const = 0;
-
     //Getters & Setters
     Cell                getValue() const;
+
+    // In-Game Use
+   virtual CellIndex    makeAMove(vector<CellIndex> aMoves) const = 0;
 
 //----------PRIVATE CLASSES----------
 private:

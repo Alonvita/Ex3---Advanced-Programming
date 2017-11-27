@@ -24,10 +24,10 @@ using namespace std;
 class Participant : public Player {
 public:
     //----------PUBLIC FUNCTIONS----------
-    //Initializers
+    // Initialize
     explicit            Participant(Cell c);
 
-    //In-Game Usage
+    // In-Game Use
     virtual CellIndex   makeAMove(vector<CellIndex> aMoves) const;
     vector<string> 		stringToVector(string str) const;
     CellIndex 			stringToPlayerMove(string rawString) const;

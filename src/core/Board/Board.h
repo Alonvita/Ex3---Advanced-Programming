@@ -37,31 +37,30 @@ enum BoardType { sixBySix = 1, eightByEight, tenByTen };
 
 class Board {
 public:
-    //Initializer
+    // Initialize
     Board();
     Board(int boardType);
-    //Destructor
+
+    // Destruct
     ~Board();
 
     //----------PUBLIC FUNCTIONS----------
-    //Getters
+    // Getters & Setters
     int 				getSpaceLeft();
     vector<CellIndex> 	getCellsInUse();
     Cell 				getBoardCell(int row, int col);
     int					getSize();
     int                 getAvailableSlots();
     Board*              getBoard();
-
-    //Setters
     void                setCell(int row, int col, Cell val);
+    vector<CellIndex> 	getEmptyNeighbors(CellIndex cI);	
+    vector<CellIndex>	getCellPotentialAsVector(CellIndex cI, Cell type);
 
-    //Printing
+    // Printing
     void 				printBoard();
 
-    //In-game use
-    vector<CellIndex> 	getEmptyNeighbors(CellIndex cI);
+    // In-game use
     void				moveMade(CellIndex cI, Cell value);
-    vector<CellIndex>	getCellPotentialAsVector(CellIndex cI, Cell type);
     int*                evaluateFinalScore();
 
     //Utility
@@ -74,16 +73,18 @@ private:
     vector<CellIndex> 	cellsInUse;
 
     //----------PRIVATE FUNCTIONS----------
-    //Initialization
+    // Initialization
     void 				initializeBoard();
     void 				initializeStartingCellValues();
     int 				defineBoardSize(int boardType);
-    //Utility
+
+    // Utility
     string 				generateCellValue(Cell c);
     vector<CellIndex> 	findPotentialInPath(CellIndex cI, int dRow,
                                              int dCol, Cell type);
     void 				changeCellColor(CellIndex cI);
-    //Printing
+
+    // Printing
     void 				printColsNumbers();
     void 				printSeparatingLine();
 };

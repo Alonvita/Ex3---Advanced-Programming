@@ -32,13 +32,14 @@ using namespace std;
 class AI : public Player, public MovesEvaluator {
 public:
     //----------PUBLIC FUNCTIONS----------
-    //Initializers
+    // Initialize
     explicit            AI(Board* gameBoard);
 
-    //In-Game Usage
+    // In-Game Use
     virtual CellIndex   makeAMove(vector<CellIndex> aMoves) const;
 
 private:
+	// Utility
     int                 calculatePotential(Board *gb,
                                            vector<CellIndex> vec) const;
 };

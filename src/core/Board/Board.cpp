@@ -90,7 +90,7 @@ vector<CellIndex> Board::getCellsInUse() {
 }
 
 Cell Board::getBoardCell(int row, int col) {
-    if(0 < row && row < size && 0 < col && col < size) {
+    if(0 <= row && row < size && 0 <= col && col < size) {
         return BOARD[row][col];
     }
     return OUT_OF_BOUNDS;

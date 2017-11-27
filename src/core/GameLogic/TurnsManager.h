@@ -32,22 +32,21 @@ using namespace std;
 class TurnsManager: MovesEvaluator {
 public:
     //----------PUBLIC FUNCTIONS----------
-    //Initializer
+    // Initialize
     TurnsManager();
     TurnsManager(int numPlayers, Board* gb);
-    //Destructor
+
+    // Destruct
     ~TurnsManager();
 
-    //Getters & Setters
+    // Getters & Setters
     int	                getAvailableMovesNum();
     Cell				getCurrentPlayerColor();
 
-    //Utilities
+    // Utility
     void 				endTurn();
     CellIndex 			nextMove();
-
-    //Nested Classes
-    void evaluateAvailableMovesForThisTurn(Board *gb);
+    void 				evaluateAvailableMovesForThisTurn(Board *gb);
 private:
     //----------VARIABLES----------
     bool 				    playerTurn;
@@ -55,15 +54,15 @@ private:
     vector<CellIndex>	    availableMoves;
 
     //----------PRIVATE FUNCTIONS----------
-    //Initializers
+    // Initialization
     void	 			initializeTwoParticipants();
     void                initializeOneParticipant(Board* gb);
 
-    //Utilities
+    // Utility
     string 				callPlayerByName();
     bool 				isMoveLegal(CellIndex cI);
 
-    //Printing
+    // Printing
     void				printAvailableMoves();
 };
 
