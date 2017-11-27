@@ -1,0 +1,77 @@
+* commit d8364016f4833f63b75097e3f5649ef08539f994
+| Author: alon <alon.vita@gmail.com>
+| Date:   Sat Nov 25 00:42:02 2017 +0200
+| 
+|     1). Added all of the FINISHED tests for ALL classes needed testing
+|     2). Added default init to: Board, TurnsManager
+|  
+* commit 6343856a964977311b79a3506ec195c89d5bc1aa
+| Author: alon <alon.vita@gmail.com>
+| Date:   Thu Nov 23 17:54:21 2017 +0200
+| 
+|     1(. Branching code into directories and adding CMakeLists file
+|     2). adding paths to all header files
+|  
+* commit 3a06c2b546ca1becf1c33429af337829ba148489
+| Author: alon <alon.vita@gmail.com>
+| Date:   Sun Nov 19 22:56:54 2017 +0200
+| 
+|     Added some notes & Attached AI to the Game
+|     
+|     It seems to work and I even got a Tie
+|  
+* commit 6319d7fc843adaa261e2bbe11bc2c04c1cf658ad
+| Author: alon <alon.vita@gmail.com>
+| Date:   Tue Nov 14 18:04:50 2017 +0200
+| 
+|     added AI.cpp and AI.h
+|     added MovesEvaluator.h and MovesEvaluator.cpp
+|     
+|     TurnsManager implements MovesEvaluator
+|     AI implements Player AND MovesEvaluator
+|     
+|     NEXT:
+|     Need to deal with makeAMove() for AI. logic in Ex3.pdf
+|  
+* commit 51f08c136d2ba3eeb552a333a5a28a3709ccca65
+| Author: alon <alon.vita@gmail.com>
+| Date:   Tue Nov 14 18:03:07 2017 +0200
+| 
+|     added AI.cpp and AI.h
+|     added MovesEvaluator.h and MovesEvaluator.cpp
+|     
+|     TurnsManager implements MovesEvaluator
+|     AI implements Player AND MovesEvaluator
+|     
+|     NEXT:
+|     Need to deal with makeAMove() for AI. logic in Ex3.pdf
+|  
+* commit 7fd92616875a0f14e1339d7d6ef6a16a3df20df7
+| Author: alon <alon.vita@gmail.com>
+| Date:   Tue Nov 14 14:08:07 2017 +0200
+| 
+|     added AI.cpp and AI.h
+|  
+* commit ec9a7ea08caa49e5ae1638de466a2202d719fdea
+| Author: alon <alon.vita@gmail.com>
+| Date:   Sun Nov 12 20:01:18 2017 +0200
+| 
+|     Initializing Project
+|  
+* commit af46119db4440b023c5b3411ddc172d8a6096900
+| Author: alon <alon.vita@gmail.com>
+| Date:   Sun Nov 12 18:08:45 2017 +0200
+| 
+|     Initializing Project
+|  
+* commit 429e75936a44b4a524668828cd1e20a698fc415e
+| Author: alon <alon.vita@gmail.com>
+| Date:   Sun Nov 12 18:08:00 2017 +0200
+| 
+|     Initializing Project
+|  
+* commit ff7bd3b4f5f15e2a08dae751fc1f45e5a064a7c6
+  Author: Alonvita <32520463+Alonvita@users.noreply.github.com>
+  Date:   Sun Nov 12 17:21:05 2017 +0200
+  
+      Initial commit
